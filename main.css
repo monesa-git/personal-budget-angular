@@ -54,12 +54,14 @@ div.hero h2 {
     margin: 0;
 }
 
+/* Added contrast on A11y */
 div.hero h1 {
     color: #483D8B;
     font-size: 4.2em;
     margin-bottom: 20px;
 }
 
+/* Added contrast on A11y */
 div.hero h2 {
     color: #483D8B;
 }
@@ -92,6 +94,7 @@ div.hero h2 {
     margin: 20px;
 }
 
+/* Added contrast on A11y */
 .text-box section h1{
     color: #483D8B;
 }
@@ -110,7 +113,6 @@ div.hero h2 {
 /*Added this for mobile devices - SEO*/
 @media screen and (max-width: 767px) {
     body {
-        /* Added this for proper SEO */
         font-size: 12px;
     }
 
@@ -128,15 +130,9 @@ div.hero h2 {
     }
 }
 
-/* Monesa's css starts here
-  This is for the skip to content
-*/
+/* Added contrast on A11y */
 .skip-to-content-link {
     left: 50%;
     position: absolute;
     top:-20px;
   }
-
-  /*
-  Skip to content 
-  */
