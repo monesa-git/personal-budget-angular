@@ -2,104 +2,163 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- The below line is for SEO. I have added meta description  -->
+    <meta name="description" content="This is my personal budget website which I am developing for my Network Based Application Development Course.">
+    <!-- Meta description works -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- The below line is for SEO. Fav icon added in the browser -->
+    <link rel="icon" type="image/ico" href="favicon.ico"/>
+    <!-- Fav Icon ended here -->
+
     <title>Personal Budget</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-
+    <!-- Added header for semantics -->
+    <header>
+       <!-- Added skip to content for A11y --> 
+    <a class="skip-to-content-link" href="#main">
+        Skip to content
+      </a>
     <div class="menu">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about.html">About</a></li>
-            <li><a href="/login.html">Login</a></li>
-            <li><a href="https://google.com">Google</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="https://google.com" target="blank">Google</a></li>
         </ul>
     </div>
-
+    </header>
     <div class="hero">
         <h1>Personal Budget</h1>
         <h2>A personal-budget management app</h2>
     </div>
 
-    <div class="container center">
+    <div id = "main" class="container center">
 
         <div class="page-area">
 
             <div class="text-box">
+                <!-- Added section for semantics -->
+                <section>
                 <h1>Stay on track</h1>
                 <p>
                     Do you know where you are spending your money? If you really stop to track it down,
                     you would get surprised! Proper budget management depends on real data... and this
-                    app will help you with that!
+                    app will help you with that! 
+                    <!-- Creating good link text - SEO -->
+                    <p>Read more about how to <a href="sectionDetail.html">stay on track</a></p>
                 </p>
+            </section>
             </div>
-    
+
             <div class="text-box">
-                <h1>Alerts</h1>
-                <p>
-                    What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
-                </p>
-            </div>
-    
-            <div class="text-box">
+                <!-- Added section for semantics -->
+                <section>
                 <h1>Results</h1>
                 <p>
                     People who stick to a financial plan, budgeting every expense, get out of debt faster!
                     Also, they to live happier lives... since they expend without guilt or fear... 
                     because they know it is all good and accounted for.
+                    <!-- Creating good link text - SEO -->
+                    <p>Read more about how to <a href="sectionDetail.html">generate Results</a></p>
                 </p>
+            </section>
             </div>
     
             <div class="text-box">
+                <!-- Added section for semantics -->
+                <section>
+                <h1>Alerts</h1>
+                <p>
+                    What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
+                    <!-- Creating good link text - SEO -->
+                    <p>Read more about how to <a href="sectionDetail.html">create Alerts</a></p>
+                </p>
+            </section>
+            </div>
+    
+            
+    
+            <div class="text-box">
+                <!-- Added section for semantics -->
+                <section>
                 <h1>Free</h1>
                 <p>
-                    This app is free!!! And you are the only one holding your data!
+                    This app is free!!! And you are the only one holding your data! Terms and Conditions apply.
+                    <!-- Creating good link text - SEO -->
+                    <p>Read more about how to <a href="sectionDetail.html">Terms and Conditions</a></p>
                 </p>
+            </section>
             </div>
     
             <div class="text-box">
+                <!-- Added section for semantics -->
+                <section>
                 <h1>Stay on track</h1>
                 <p>
                     Do you know where you are spending your money? If you really stop to track it down,
                     you would get surprised! Proper budget management depends on real data... and this
                     app will help you with that!
+                    <!-- Creating good link text - SEO -->
+                    <p>Read more about how to <a href="sectionDetail.html">stay on track</a></p>
                 </p>
+            </section>
             </div>
-    
+
             <div class="text-box">
-                <h1>Alerts</h1>
-                <p>
-                    What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
-                </p>
-            </div>
-    
-            <div class="text-box">
+                 <!-- Added section for semantics -->
+                <section>
                 <h1>Results</h1>
                 <p>
                     People who stick to a financial plan, budgeting every expense, get out of debt faster!
                     Also, they to live happier lives... since they expend without guilt or fear... 
                     because they know it is all good and accounted for.
+                    <!-- Creating good link text - SEO -->
+                    <p>Read more about how to <a href="sectionDetail.html">generate Results</a></p>
                 </p>
+            </section>
             </div>
     
             <div class="text-box">
+                 <!-- Added section for semantics -->
+                <section>
+                <h1>Alerts</h1>
+                <p>
+                    What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
+                    <!-- Creating good link text - SEO -->
+                    <p>Read more about how to <a href="sectionDetail.html">create Alerts</a></p>
+                </p>
+            </section>
+            </div>
+    
+    
+            <div class="text-box">
+                 <!-- Added section for semantics -->
+                <section>
                 <h1>Free</h1>
                 <p>
-                    This app is free!!! And you are the only one holding your data!
+                    This app is free!!! And you are the only one holding your data! Terms and Conditions apply.
+                    <!-- Creating good link text - SEO -->
+                    <p>Read more about how to <a href="sectionDetail.html">Terms and Conditions</a></p>
                 </p>
+            </section>
             </div>
 
         </div>
 
     </div>
 
+    <!-- Added footer for semantics -->
+    <footer>
     <div class="bottom">
         <div class="center">
             All rights reserved &copy; Fabio Nolasco
         </div>
     </div>
+    </footer>
 
 </body>
 </html>
