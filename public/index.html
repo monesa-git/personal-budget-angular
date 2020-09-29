@@ -149,7 +149,12 @@
 
         </div>
 
+        <div class="chart-container" style="position: relative; height:80vh; width:80vw; margin:auto">
+        <canvas id="myChart"></canvas>
+        </div>
+
     </div>
+    
 
     <!-- Added footer for semantics -->
     <footer>
@@ -159,6 +164,44 @@
         </div>
     </div>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+
+
+    <script>
+
+data = {
+    datasets: [{
+        data: [],
+        backgroundColor:[],
+    }],
+
+    labels: []
+};
+
+function createChart(){
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myPieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data : data
+    }) ;
+}
+
+function getBudget(){
+    axios.get('/budget').then(function(res){
+            console.log(res.data);
+            for(var i=0; i<res.data.myBudget.length; i++){
+                data.datasets[0].data[i] = res.data.myBudget[i].budget;
+                data.labels[i] = res.data.myBudget[i].title;
+                data.datasets[0].backgroundColor[i] = res.data.myBudget[i].color;
+            }
+            createChart();
+    });
+}
+getBudget();
+
+    </script>
 
 </body>
 </html>
