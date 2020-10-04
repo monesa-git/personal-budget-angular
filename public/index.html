@@ -147,10 +147,14 @@
 
 
             <div class="chart-container" style="position: relative; width:700px; margin:auto">
+                <h1>Chart Js Pie Chart</h1>
                 <canvas id="myChart"></canvas>
+
+                <h1>D3Js Chart</h1>
+                <div class="another-chart-container"></div>
                 </div>
                 
-                <div class="another-chart-container"></div>
+                
         </div>
         
     </div>
@@ -247,12 +251,12 @@ var range = [];
 var backgroundColor = [];
 
 d3.json("/budget", function(data) {
-    console.log(data["myBudget"].length);
+    console.log(data["myBudget"]);
     
     for(var i = 0; i<data["myBudget"].length; i++){
         array[i] = data["myBudget"][i].title;
         range[i] = data["myBudget"][i].budget;
-        backgroundColor[i] = data["myBudget"].color;
+        backgroundColor[i] = data["myBudget"][i].color;
         console.log(array[i]);
     }
 
@@ -260,10 +264,10 @@ d3.json("/budget", function(data) {
     var color = d3.scale
     .ordinal()
 	.domain(array)
-    .range(range);
+    .range(backgroundColor);
 function randomData (){
     var labels = color.domain();
-    var rangeValues = color.range();
+    var rangeValues = range;
     console.log(labels);
     var i = 0;
     var j = 0;
