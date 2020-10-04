@@ -149,12 +149,14 @@
 
         </div>
 
-        <div class="chart-container" style="position: relative; height:80vh; width:80vw; margin:auto">
+
+    </div>
+    
+    <div class="chart-container" style="position: relative; height:50vh; width:50vw; margin:auto">
         <canvas id="myChart"></canvas>
         </div>
         
-    </div>
-    
+        <div class="another-chart-container"></div>
 
     <!-- Added footer for semantics -->
     <footer>
@@ -168,10 +170,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 
-    
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+
     <script>
 
-     //The below code is for chart js
+        //The below code is for chart js
 
 dataChart = {
     datasets: [{
@@ -203,7 +208,170 @@ function getBudget(){
 }
 getBudget();
 
+
+//The below code is for D3js
+
+var svg = d3.select(".another-chart-container")
+	.append("svg")
+	.append("g")
+
+svg.append("g")
+	.attr("class", "slices");
+svg.append("g")
+	.attr("class", "labels");
+svg.append("g")
+	.attr("class", "lines");
+
+var width = 600,
+    height = 500,
+	radius = Math.min(width, height) / 2;
+
+var pie = d3.layout.pie()
+	.sort(null)
+	.value(function(d) {
+		return d.value;
+	});
+
+var arc = d3.svg.arc()
+	.outerRadius(radius * 0.8)
+	.innerRadius(radius * 0.4);
+
+var outerArc = d3.svg.arc()
+	.innerRadius(radius * 0.9)
+	.outerRadius(radius * 0.9);
+
+svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+var key = function(d){ return d.data.label; };
+var color;
+var array = [];
+var range = [];
+var backgroundColor = [];
+
+d3.json("/budget", function(data) {
+    console.log(data["myBudget"].length);
+    
+    for(var i = 0; i<data["myBudget"].length; i++){
+        array[i] = data["myBudget"][i].title;
+        range[i] = data["myBudget"][i].budget;
+        backgroundColor[i] = data["myBudget"].color;
+        console.log(array[i]);
+    }
+
+  
+    var color = d3.scale
+    .ordinal()
+	.domain(array)
+    .range(range);
+function randomData (){
+    var labels = color.domain();
+    var rangeValues = color.range();
+    console.log(labels);
+    var i = 0;
+    var j = 0;
+	return labels.map(function(label){
+		return { label: labels[i++], value: rangeValues[j++] }
+	});
+}
+
+change(randomData());
+
+
+function change(data) {
+
+	/* ------- PIE SLICES -------*/
+	var slice = svg.select(".slices").selectAll("path.slice")
+		.data(pie(data), key);
+
+	slice.enter()
+		.insert("path")
+		.style("fill", function(d) { return color(d.data.label); })
+		.attr("class", "slice");
+
+	slice		
+		.transition().duration(1000)
+		.attrTween("d", function(d) {
+			this._current = this._current || d;
+			var interpolate = d3.interpolate(this._current, d);
+			this._current = interpolate(0);
+			return function(t) {
+				return arc(interpolate(t));
+			};
+		})
+
+	slice.exit()
+		.remove();
+
+	/* ------- TEXT LABELS -------*/
+
+	var text = svg.select(".labels").selectAll("text")
+		.data(pie(data), key);
+
+	text.enter()
+		.append("text")
+		.attr("dy", ".35em")
+		.text(function(d) {
+			return d.data.label;
+		});
+	
+	function midAngle(d){
+		return d.startAngle + (d.endAngle - d.startAngle)/2;
+	}
+
+	text.transition().duration(1000)
+		.attrTween("transform", function(d) {
+			this._current = this._current || d;
+			var interpolate = d3.interpolate(this._current, d);
+			this._current = interpolate(0);
+			return function(t) {
+				var d2 = interpolate(t);
+				var pos = outerArc.centroid(d2);
+				pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+				return "translate("+ pos +")";
+			};
+		})
+		.styleTween("text-anchor", function(d){
+			this._current = this._current || d;
+			var interpolate = d3.interpolate(this._current, d);
+			this._current = interpolate(0);
+			return function(t) {
+				var d2 = interpolate(t);
+				return midAngle(d2) < Math.PI ? "start":"end";
+			};
+		});
+
+	text.exit()
+		.remove();
+
+	/* ------- SLICE TO TEXT POLYLINES -------*/
+
+	var polyline = svg.select(".lines").selectAll("polyline")
+		.data(pie(data), key);
+	
+	polyline.enter()
+		.append("polyline");
+
+	polyline.transition().duration(1000)
+		.attrTween("points", function(d){
+			this._current = this._current || d;
+			var interpolate = d3.interpolate(this._current, d);
+			this._current = interpolate(0);
+			return function(t) {
+				var d2 = interpolate(t);
+				var pos = outerArc.centroid(d2);
+				pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+				return [arc.centroid(d2), outerArc.centroid(d2), pos];
+			};			
+		});
+	
+	polyline.exit()
+		.remove();
+};
+
 });
+
+
+
     </script>
 
 </body>
