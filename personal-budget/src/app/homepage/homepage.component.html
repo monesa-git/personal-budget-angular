@@ -1,4 +1,5 @@
 <div id = "main" class="container center">
+  <pb-breadcrumbs></pb-breadcrumbs>
   <div class="page-area">
     <div class="text-box">
       <!-- Added section for semantics -->
@@ -8,7 +9,7 @@
           you would get surprised! Proper budget management depends on real data... and this
           app will help you with that!
           <!-- Creating good link text - SEO -->
-          <span>Read more about how to <a href="sectionDetail.html">stay on track</a></span></div>
+          <span>Read more about how to <a [routerLink]="['/sectionDetail']">stay on track</a></span></div>
 
   </pb-article>
   </div>
@@ -22,7 +23,7 @@
         Also, they to live happier lives... since they expend without guilt or fear...
         because they know it is all good and accounted for.
         <!-- Creating good link text - SEO -->
-        <span>Read more about how to <a href="sectionDetail.html">generate Results</a></span>
+        <span>Read more about how to <a [routerLink]="['/sectionDetail']">generate Results</a></span>
     </div>
 </pb-article>
 </div>
@@ -34,7 +35,7 @@
     <div>
         What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
         <!-- Creating good link text - SEO -->
-        <span>Read more about how to <a href="sectionDetail.html">create Alerts</a></span>
+        <span>Read more about how to <a [routerLink]="['/sectionDetail']">create Alerts</a></span>
     </div>
 </pb-article>
 </div>
@@ -46,7 +47,7 @@
     <div>
         This app is free!!! And you are the only one holding your data! Terms and Conditions apply.
         <!-- Creating good link text - SEO -->
-        <span>Read more about how to <a href="sectionDetail.html">Terms and Conditions</a></span>
+        <span>Read more about how to <a [routerLink]="['/sectionDetail']">Terms and Conditions</a></span>
     </div>
 </pb-article>
 </div>
@@ -60,7 +61,7 @@
         you would get surprised! Proper budget management depends on real data... and this
         app will help you with that!
         <!-- Creating good link text - SEO -->
-        <span>Read more about how to <a href="sectionDetail.html">stay on track</a></span>
+        <span>Read more about how to <a [routerLink]="['/sectionDetail']">stay on track</a></span>
     </div>
 </pb-article>
 </div>
@@ -74,7 +75,7 @@
         Also, they to live happier lives... since they expend without guilt or fear...
         because they know it is all good and accounted for.
         <!-- Creating good link text - SEO -->
-        <span>Read more about how to <a href="sectionDetail.html">generate Results</a></span>
+        <span>Read more about how to <a [routerLink]="['/sectionDetail']">generate Results</a></span>
     </div>
 </pb-article>
 </div>
@@ -86,7 +87,7 @@
     <div>
         What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
         <!-- Creating good link text - SEO -->
-        <span>Read more about how to <a href="sectionDetail.html">create Alerts</a></span>
+        <span>Read more about how to <a [routerLink]="['/sectionDetail']">create Alerts</a></span>
     </div>
 </pb-article>
 </div>
@@ -99,7 +100,7 @@
     <div>
         This app is free!!! And you are the only one holding your data! Terms and Conditions apply.
         <!-- Creating good link text - SEO -->
-        <span>Read more about how to <a href="sectionDetail.html">Terms and Conditions</a></span>
+        <span>Read more about how to <a [routerLink]="['/sectionDetail']">Terms and Conditions</a></span>
     </div>
 </pb-article>
 </div>
@@ -110,8 +111,9 @@
     <canvas id="myChart"></canvas>
 
     <h1>D3Js Chart</h1>
-    <div class="another-chart-container"></div>
-    </div>
+    <!-- <div class="another-chart-container"></div>
+    </div> -->
+    <figure id="pie"></figure>
 
   </div>
 </div>
